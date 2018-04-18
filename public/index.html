@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <title>Gleb's Russian Watches</title>
+    <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>-->
+</head>
+<body>
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal text-white">
+          <p>Gleb's Russian Watches<br />15 Field House Dr, Provo, UT</p>
+      </h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <h5 class="my-0 mr-md-auto font-weight-normal text-white">
+            <p>Monday-Friday 9-5<br />
+            Call us at 123-456-7890</p>
+        </h5>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-3 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Vostok Amphibia Classic</h4>
+          </div>
+          <div class="card-body">
+            <img src="vostokAmphibiacrop.jpg">
+            <br />
+            <p style="color:green">$55.00 USD</p>
+            <p>Comes on Stainless steel band</p>
+            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="window.location.href='/purchase.html?watch=vostokAmphibia'">Purchase</button>
+          </div>
+        </div>
+        <div class="card mb-3 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Poljot Okean Final Edition</h4>
+          </div>
+          <div class="card-body">
+            <img src="poljotOkean.jpg">
+            <br />
+            <p style="color:green">$625.00 USD</p>
+                <p>Comes on blue NATO strap</p>
+            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="window.location.href='/purchase.html?watch=poljotOkean'">Purchase</button>
+          </div>
+        </div>
+        <div class="card mb-3 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Vostok Europe N-1 Rocket</h4>
+          </div>
+          <div class="card-body">
+            <img src="./vostokN1crop.jpg">
+            <br />
+            <p style="color:green">$600.00 USD</p>
+            <p>Comes on black leather strap</p>
+            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="window.location.href='/purchase.html?watch=vostokN1'">Purchase</button>
+          </div>
+        </div>
+        <div class="card mb-3 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text" id="btnGroupAddon">eBay</div>
+                    </div>
+                    <input id="SearchVal" type="text" class="form-control" placeholder="API Search" aria-label="API Search" aria-describedby="btnGroupAddon">
+                  </div>
+
+            </h4>
+          </div>
+          <div class="card-body" id="ebayBox">
+            Try to search for our favorites like Okeah, Komandirskie, Molniya and more!
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#adminModal" style="float:right">
+        Admins Only
+      </button>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal" style="float:right">
+        login
+      </button>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted"><a href="https://github.com/gmattabernethy/gitpractice">github</a></span>
+      </div>
+    </footer>
+
+    <div id='app'>
+    <div id="adminModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Purchase History</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <tr>
+                <td>Name</td>
+                <td>Purchase</td>
+                <td>Date</td>
+                <td>Price</td>
+              </tr>
+              <tr v-for="p in allPurchases">
+                <td>
+                  <span class="input-group mb-3">
+                    <input type="text" class="form-control input-sm" v-model="p.name" style="width:100px">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-info" type="button" v-on:click="editPurchase(p)">Save</button>
+                    </div>
+                  </span>
+                </td>
+                <td>{{p.watchName}}</td>
+                <td>{{p.date}}</td>
+                <td class="text-right">${{p.price}}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align:right"><b>Grand Total : ${{grandTotal}}.00</b></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="loginModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/api/login" method="post">
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="loginEmail">Email Address</label>
+                  <input type="email" class="form-control" id="loginEmail" placeholder="Email" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="">
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-success">Login</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="script.js"></script>
+<script>
+    function _cb_findItemsByKeywords(root) {
+        var items = root && root.findItemsByKeywordsResponse && root.findItemsByKeywordsResponse[0] && root.findItemsByKeywordsResponse[0].searchResult && root.findItemsByKeywordsResponse[0].searchResult[0] && root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+        var item = items[0];
+        var pic = item.galleryURL;
+        var title = item.title;
+        insertedHTML = '<p>' + item.title.toString().substring(0, 40) + '</p>';
+        insertedHTML += '<img src="' + pic + '"border = "1">';
+        //  Maybe use?
+        var shippingInfo = item.shippingInfo && item.shippingInfo[0] || {};
+        var sellingStatus = item.sellingStatus && item.sellingStatus[0] || {};
+        var listingInfo = item.listingInfo && item.listingInfo[0] || {};
+        var subtitle = item.subtitle || '';
+
+        var viewitem = item.viewItemURL;
+        var currentPrice = sellingStatus.currentPrice && sellingStatus.currentPrice[0] || {};
+        var displayPrice = currentPrice['__value__'] + ' ' + currentPrice['@currencyId'];
+        insertedHTML += '<p style="color:green">$' + displayPrice + '</p>';
+
+        var buyItNowAvailable = listingInfo.buyItNowAvailable && listingInfo.buyItNowAvailable[0] === 'true';
+        if(buyItNowAvailable){
+            insertedHTML += '<p>Buy it now available</p>'
+        }else{
+            insertedHTML += '<p>Buy it now NOT available</p>'
+        }
+
+        insertedHTML += '<button type="button" class="btn btn-lg btn-block btn-primary" onclick="window.location.href=\'' + viewitem + '\'">Purchase</button>';
+        // Display data
+        $("#ebayBox").html(insertedHTML);
+    }
+
+$(document).ready(function() {
+    var url = '';
+    $("#SearchVal").change(function(e) {
+        var val = $("#SearchVal").val();
+        if(val.length>2){
+           goSearch(val);
+        }
+    });
+
+    function goSearch(val){
+        var url = "https://svcs.ebay.com/services/search/FindingService/v1?SECURITY-APPNAME=GlennAbe-BYUCS260-PRD-1132041a0-e2eb0ce1&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&RESPONSE-DATA-FORMAT=JSON&callback=_cb_findItemsByKeywords&REST-PAYLOAD&keywords=" + val + "%20watch&paginationInput.entriesPerPage=1&GLOBAL-ID=EBAY-US&siteid=0"
+
+        $.ajax({
+            url : url,
+            dataType : "jsonp",
+            success : function(json){
+                console.log(json);
+
+            }
+        });
+    }
+
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#adminButton').trigger('focus')
+  })
+
+});
+</script>
+
+</html>
